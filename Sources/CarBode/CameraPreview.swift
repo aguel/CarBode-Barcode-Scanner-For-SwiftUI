@@ -75,6 +75,14 @@ public class CameraPreview: UIView {
         }
         session.commitConfiguration()
     }
+    
+    let deviceTypes: [AVCaptureDevice.DeviceType] = [
+        .builtInTripleCamera,
+        .builtInDualWideCamera,
+        .builtInDualCamera,
+        .builtInUltraWideCamera,
+        .builtInWideAngleCamera
+    ]
 
     func setCamera(position: AVCaptureDevice.Position) {
 
@@ -89,7 +97,7 @@ public class CameraPreview: UIView {
             cameraInput = nil
         }
 
-        let deviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: AVMediaType.video, position: cameraPosition)
+        let deviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: deviceTypes, mediaType: AVMediaType.video, position: cameraPosition)
 
         let camera = deviceDiscoverySession.devices.first
         if let selectedCamera = camera {
@@ -138,7 +146,7 @@ public class CameraPreview: UIView {
     }
 
     func setupCamera() {
-        let deviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: AVMediaType.video, position: cameraPosition)
+        let deviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: deviceTypes, mediaType: AVMediaType.video, position: cameraPosition)
 
         if let selectedCamera = deviceDiscoverySession.devices.first {
             if let input = try? AVCaptureDeviceInput(device: selectedCamera) {
