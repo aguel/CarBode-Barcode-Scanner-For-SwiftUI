@@ -9,8 +9,6 @@
 import SwiftUI
 import AVFoundation
 
-
-
 public struct CBScanner: UIViewRepresentable {
 
     public typealias OnFound = (BarcodeData)->Void
@@ -25,11 +23,10 @@ public struct CBScanner: UIViewRepresentable {
     public var torchLightIsOn:Bool
     
     @Binding
-    public var scanInterval: Double
-
-    @Binding
     public var zoom:Double
     
+    @Binding
+    public var scanInterval: Double
     
     @Binding
     public var cameraPosition:AVCaptureDevice.Position
@@ -43,8 +40,8 @@ public struct CBScanner: UIViewRepresentable {
     public var onDraw: OnDraw?
     
     public init(supportBarcode:Binding<[AVMetadataObject.ObjectType]> ,
-         zoom: Binding<Double> = .constant(2.0),
          torchLightIsOn: Binding<Bool> = .constant(false),
+                zoom: Binding<Double> = .constant(2.0),
          scanInterval: Binding<Double> = .constant(3.0),
          cameraPosition: Binding<AVCaptureDevice.Position> = .constant(.back),
          mockBarCode: Binding<BarcodeData> = .constant(BarcodeData(value: "barcode value", type: .qr)),
@@ -79,7 +76,7 @@ public struct CBScanner: UIViewRepresentable {
     }
 
     public func updateUIView(_ uiView: CameraPreview, context: UIViewRepresentableContext<CBScanner>) {
-        
+
         uiView.setTorchLight(isOn: torchLightIsOn)
         uiView.zoom(to: zoom)
         uiView.setCamera(position: cameraPosition)
@@ -91,7 +88,7 @@ public struct CBScanner: UIViewRepresentable {
 
         if isActive {
             if !(uiView.session?.isRunning ?? false) {
-               uiView.session?.startRunning()
+                uiView.session?.startRunning()
             }
             uiView.updateCameraView()
         } else {
