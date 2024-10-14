@@ -39,7 +39,7 @@ public struct CBScanner: UIViewRepresentable {
     public var onDraw: OnDraw?
     
     public init(supportBarcode:Binding<[AVMetadataObject.ObjectType]> ,
-         torchLightIsOn: Binding<Bool> = .constant(false),
+         torchLightIsOn: Binding<Bool> = .constant(true),
          scanInterval: Binding<Double> = .constant(3.0),
          cameraPosition: Binding<AVCaptureDevice.Position> = .constant(.back),
          mockBarCode: Binding<BarcodeData> = .constant(BarcodeData(value: "barcode value", type: .qr)),
